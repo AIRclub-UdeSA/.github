@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./assets/banner.svg" width="100%" alt="AIR Club UdeSA — Inteligencia artificial y robótica, en comunidad">
+  <img src="./assets/banner.png" width="100%" alt="Comunidad AIR Club UdeSA — proyectos, eventos y actividades para conectar, aprender e innovar juntos">
 </p>
 
 <p align="center">
