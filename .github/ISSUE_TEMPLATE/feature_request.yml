@@ -1,0 +1,29 @@
+name: Feature request
+description: Propose a concrete improvement to an AIR Club UdeSA project. Spanish or English is welcome.
+title: "[Feature]: "
+body:
+  - type: textarea
+    id: need
+    attributes:
+      label: Need
+      description: What problem or need should be addressed?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Explain the solution and how it would be used.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives
+      description: Did you consider another way to solve it?
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am interested in working on this improvement.

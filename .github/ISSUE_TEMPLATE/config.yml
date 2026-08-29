@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Challenge JAR 2026
+    url: https://airclub-udesa.github.io/jar_site/
+    about: Setup guides, workshops, and participant information.
+  - name: AIR Club UdeSA
+    url: https://clubroboticaudesa.netlify.app/
+    about: Club activities, community, and contact.

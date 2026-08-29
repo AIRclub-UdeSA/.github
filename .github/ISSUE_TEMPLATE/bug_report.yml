@@ -1,0 +1,44 @@
+name: Bug report
+description: Report a reproducible problem in an AIR Club UdeSA project. Spanish or English is welcome.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for helping us improve the project. Do not include secrets, personal data, or confidential information.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What happened, and what did you expect?
+      placeholder: Describe the problem precisely.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      description: Include the minimal steps and commands.
+      placeholder: "1. ...\n2. ...\n3. ..."
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, hardware, and relevant versions.
+      placeholder: Ubuntu 22.04, ROS 2 Humble, commit...
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Additional evidence
+      description: Short logs, screenshots, or additional context.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Confirmation
+      options:
+        - label: I checked the open issues and found no equivalent report.
+          required: true
