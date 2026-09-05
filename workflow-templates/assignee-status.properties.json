@@ -1,0 +1,8 @@
+{
+  "name": "Sync assignee status",
+  "description": "Moves an issue or pull request to In progress when someone is assigned, and back to Ready when nobody is.",
+  "iconName": "octicon person",
+  "categories": [
+    "Automation"
+  ]
+}

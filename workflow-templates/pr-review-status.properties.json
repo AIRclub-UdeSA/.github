@@ -1,0 +1,8 @@
+{
+  "name": "Sync PR review status",
+  "description": "Moves the pull request and the issues it closes to In review when a reviewer is requested.",
+  "iconName": "octicon code-review",
+  "categories": [
+    "Automation"
+  ]
+}

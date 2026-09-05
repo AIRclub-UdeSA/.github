@@ -1,0 +1,28 @@
+# Reusable workflow. Callers live in each repo as .github/workflows/block-ai-coauthor.yml
+# See CONTRIBUTING.md -> "Setting up a new repository" for the full checklist.
+name: Block AI co-author
+
+on:
+  workflow_call:
+
+jobs:
+  check-commit-messages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Reject commits co-authored by Claude/Anthropic
+        run: |
+          set -e
+          BASE="${{ github.event.pull_request.base.sha }}"
+          HEAD="${{ github.event.pull_request.head.sha }}"
+          BAD=$(git log "$BASE..$HEAD" --format="%H %B" | grep -iE "co-authored-by:.*claude|noreply@anthropic\.com" || true)
+          if [ -n "$BAD" ]; then
+            echo "Found commits co-authored by Claude/Anthropic:"
+            echo "$BAD"
+            echo
+            echo "Remove the 'Co-Authored-By: Claude ...' line from the commit message and push again."
+            exit 1
+          fi

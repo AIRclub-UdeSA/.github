@@ -1,0 +1,8 @@
+{
+  "name": "Add to project",
+  "description": "Adds new issues and pull requests to the JAR Challenge 2026 project board.",
+  "iconName": "octicon project",
+  "categories": [
+    "Automation"
+  ]
+}

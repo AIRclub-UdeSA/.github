@@ -1,0 +1,14 @@
+# Caller for the shared workflow in AIRclub-UdeSA/.github
+# Setup checklist: https://github.com/AIRclub-UdeSA/.github/blob/main/CONTRIBUTING.md#setting-up-a-new-repository
+name: Sync PR review status
+
+on:
+  pull_request:
+    types: [review_requested, review_request_removed]
+
+jobs:
+  set-in-review:
+    uses: AIRclub-UdeSA/.github/.github/workflows/pr-review-status.yml@main
+    secrets:
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
