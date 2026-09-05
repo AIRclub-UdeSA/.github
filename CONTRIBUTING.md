@@ -47,6 +47,12 @@ Organization Settings → Secrets and variables → Actions → for both `APP_ID
 
 Requires organization owner permissions.
 
+### Why three of them use `pull_request_target`
+
+`add-to-project`, `pr-review-status` and `assignee-status` trigger on `pull_request_target` rather than `pull_request`. This is deliberate: GitHub withholds repository secrets from `pull_request` runs whose head is a fork, so the App token step fails for every external contribution and the pull request never reaches the board.
+
+`pull_request_target` is safe for these three because none of them checks out the contributor's code — they only read the event payload and call the Projects API. Do not apply the same change to `block-ai-coauthor`: that one does check out the pull request's code and needs no secrets, so running it with the base repository's permissions would be the well-known security hole.
+
 ### 4. Check that it works
 
 Open a test issue in the new repository. It should appear on the project board within a few seconds. If it does not, look at the Actions tab: a missing secret fails with an explicit error naming it, and a missing App installation fails while generating the token.
