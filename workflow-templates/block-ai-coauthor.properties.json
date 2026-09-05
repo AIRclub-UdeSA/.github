@@ -1,0 +1,8 @@
+{
+  "name": "Block AI co-author",
+  "description": "Fails the pull request if any commit message credits an AI assistant as co-author.",
+  "iconName": "octicon shield-check",
+  "categories": [
+    "Automation"
+  ]
+}

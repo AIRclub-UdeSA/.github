@@ -1,0 +1,16 @@
+# Caller for the shared workflow in AIRclub-UdeSA/.github
+# Setup checklist: https://github.com/AIRclub-UdeSA/.github/blob/main/CONTRIBUTING.md#setting-up-a-new-repository
+name: Sync assignee status
+
+on:
+  issues:
+    types: [assigned, unassigned]
+  pull_request:
+    types: [assigned, unassigned]
+
+jobs:
+  set-in-progress:
+    uses: AIRclub-UdeSA/.github/.github/workflows/assignee-status.yml@main
+    secrets:
+      APP_ID: ${{ secrets.APP_ID }}
+      APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}

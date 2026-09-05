@@ -1,0 +1,29 @@
+# Reusable workflow. Callers live in each repo as .github/workflows/add-to-project.yml
+# See CONTRIBUTING.md -> "Setting up a new repository" for the full checklist.
+name: Add to project
+
+on:
+  workflow_call:
+    secrets:
+      APP_ID:
+        required: true
+      APP_PRIVATE_KEY:
+        required: true
+
+jobs:
+  add-to-project:
+    name: Add issue/PR to project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate GitHub App token
+        id: app-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.APP_ID }}
+          private-key: ${{ secrets.APP_PRIVATE_KEY }}
+          owner: AIRclub-UdeSA
+
+      - uses: actions/add-to-project@v1.0.2
+        with:
+          project-url: https://github.com/orgs/AIRclub-UdeSA/projects/3
+          github-token: ${{ steps.app-token.outputs.token }}
