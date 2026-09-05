@@ -6,23 +6,69 @@ on:
   workflow_call:
 
 jobs:
+  # The job id stays `check-commit-messages` even though the job now also scans
+  # the pull request itself. It is the required status check in every repo, and
+  # renaming it would block every open pull request until all five rulesets were
+  # updated to the new name.
   check-commit-messages:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
-      - name: Reject commits co-authored by Claude/Anthropic
+      - name: Reject AI attribution in commits and in the pull request
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha }}
         run: |
-          set -e
-          BASE="${{ github.event.pull_request.base.sha }}"
-          HEAD="${{ github.event.pull_request.head.sha }}"
-          BAD=$(git log "$BASE..$HEAD" --format="%H %B" | grep -iE "co-authored-by:.*claude|noreply@anthropic\.com" || true)
-          if [ -n "$BAD" ]; then
-            echo "Found commits co-authored by Claude/Anthropic:"
-            echo "$BAD"
+          set -uo pipefail
+
+          # Deliberately narrow. This is an AI club: commits and pull requests
+          # are expected to talk about Claude, so a bare "claude" would block
+          # legitimate work. Each alternative below matches an attribution
+          # marker, not a mention.
+          PATTERN='co-authored-by:.*claude|noreply@anthropic\.com|generated with .*claude|claude\.com/claude-code'
+
+          failed=0
+
+          bad_commits=$(git log "$BASE_SHA..$HEAD_SHA" --format="%H %B" | grep -iE "$PATTERN" || true)
+          if [ -n "$bad_commits" ]; then
+            echo "Commit messages crediting an AI assistant:"
+            echo "$bad_commits"
             echo
-            echo "Remove the 'Co-Authored-By: Claude ...' line from the commit message and push again."
-            exit 1
+            echo "Rewrite the message and push again:"
+            echo "  last commit    -> git commit --amend, then git push --force-with-lease"
+            echo "  older commit   -> git rebase -i, reword it, then git push --force-with-lease"
+            echo
+            failed=1
           fi
+
+          # Read the pull request through the API rather than from the event
+          # payload. A re-run replays the original payload, so a contributor who
+          # edits the description to fix this would still see the old text and
+          # stay blocked with nothing left to remove.
+          gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.title, .body' > pr-text.txt
+          bad_pr=$(grep -iE "$PATTERN" pr-text.txt || true)
+          if [ -n "$bad_pr" ]; then
+            echo "Pull request title or description crediting an AI assistant:"
+            echo "$bad_pr"
+            echo
+            echo "Edit the pull request to remove those lines, then re-run this"
+            echo "job from the Actions tab. No new commit is needed: this job"
+            echo "re-reads the description each time it runs."
+            echo
+            failed=1
+          fi
+
+          if [ "$failed" -eq 0 ]; then
+            echo "No AI attribution found in commits, title or description."
+          fi
+
+          exit "$failed"
