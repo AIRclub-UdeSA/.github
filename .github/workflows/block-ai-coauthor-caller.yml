@@ -1,0 +1,15 @@
+# This repository runs the same check it hands to everyone else.
+#
+# Note the local `./` reference instead of the pinned `@main` the other repos
+# use: a pull request here must be validated against its own version of the
+# shared workflow, not the one already on main. Every repo calls these
+# workflows at @main, so anything merged here goes live everywhere at once.
+name: Block AI co-author
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  check-commit-messages:
+    uses: ./.github/workflows/block-ai-coauthor.yml
