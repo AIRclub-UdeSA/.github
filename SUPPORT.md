@@ -7,7 +7,7 @@ For reproducible technical questions, bugs, or concrete proposals, open an issue
 ## Other channels
 
 - Challenge JAR 2026 setup, workshops, and participant information: [Challenge website](https://airclub-udesa.github.io/jar_site/).
-- Club activities and community: [AIR Club UdeSA website](https://clubroboticaudesa.netlify.app/).
+- Club activities and community: [AIR Club UdeSA website](https://airclub.com.ar/).
 - Private, institutional, or sponsorship enquiries: [airclub@udesa.edu.ar](mailto:airclub@udesa.edu.ar).
 - Vulnerabilities or exposed credentials: follow the [Security Policy](https://github.com/AIRclub-UdeSA/.github/blob/main/SECURITY.md).
 
