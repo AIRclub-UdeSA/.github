@@ -8,7 +8,7 @@
 </p>
 
 <p align="center">
-  <a href="https://clubroboticaudesa.netlify.app/"><strong>Sitio del club</strong></a>
+  <a href="https://airclub.com.ar/"><strong>Sitio del club</strong></a>
   ·
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSeJj7cS6SaCPaBr4a6dfJzeFF9W6BRWYxfLe0BEcGepSIvJBw/viewform"><strong>Sumate a la comunidad</strong></a>
   ·
