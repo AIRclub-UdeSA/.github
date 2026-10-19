@@ -10,7 +10,7 @@
 <p align="center">
   <a href="https://airclub.com.ar/"><strong>Sitio del club</strong></a>
   ·
-  <a href="https://airclub.com.ar/contacto"><strong>Sumate a la comunidad</strong></a>
+  <a href="https://airclub.com.ar/equipo#sumarte"><strong>Sumate a la comunidad</strong></a>
   ·
   <a href="https://www.instagram.com/AIRClub_UdeSA"><strong>Instagram</strong></a>
   ·
@@ -46,6 +46,6 @@ Todo el material de preparación es abierto:
 
 ## Sumate
 
-La Comunidad AIR está abierta a estudiantes con ganas de aprender; no necesitás experiencia previa. Entrá con Google desde **[la página del club](https://airclub.com.ar/contacto)** y completá tu perfil: ya sos parte de la comunidad.
+La Comunidad AIR está abierta a estudiantes con ganas de aprender; no necesitás experiencia previa. Entrá con Google desde **[la página del club](https://airclub.com.ar/equipo#sumarte)** y completá tu perfil: ya sos parte de la comunidad.
 
 ¿Querés proponer un proyecto, una charla o una colaboración? Escribinos a **[airclub@udesa.edu.ar](mailto:airclub@udesa.edu.ar)**. Si tu empresa quiere apoyar la robótica estudiantil, también podés **[contactar al club](mailto:airclub@udesa.edu.ar?subject=Sponsorship%20AIR%20Club%20UdeSA)**.
