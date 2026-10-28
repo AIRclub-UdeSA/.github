@@ -51,7 +51,17 @@ jobs:
           # payload. A re-run replays the original payload, so a contributor who
           # edits the description to fix this would still see the old text and
           # stay blocked with nothing left to remove.
-          gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.title, .body' > pr-text.txt
+          #
+          # In a private repository the default token cannot read pull requests,
+          # and a called workflow cannot raise its own permissions: the caller
+          # has to grant `pull-requests: read` (the template already does).
+          if ! gh api "repos/$REPO/pulls/$PR_NUMBER" --jq '.title, .body' > pr-text.txt 2> gh-error.txt; then
+            cat gh-error.txt
+            if grep -q "HTTP 403" gh-error.txt; then
+              echo "::error::Cannot read the pull request (403). Add 'permissions: { contents: read, pull-requests: read }' to the check-commit-messages job in this repository's .github/workflows/block-ai-coauthor.yml, as in AIRclub-UdeSA/.github/workflow-templates/block-ai-coauthor.yml."
+            fi
+            exit 1
+          fi
           bad_pr=$(grep -iE "$PATTERN" pr-text.txt || true)
           if [ -n "$bad_pr" ]; then
             echo "Pull request title or description crediting an AI assistant:"
