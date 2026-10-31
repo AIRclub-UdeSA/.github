@@ -31,6 +31,8 @@ The logic lives once in this repository as reusable workflows, so each repo only
 
 Copy the four files from [`workflow-templates/`](https://github.com/AIRclub-UdeSA/.github/tree/main/workflow-templates) into the new repository's `.github/workflows/`. Each one is a handful of lines that points at the shared workflow here.
 
+Keep the `permissions` block in `block-ai-coauthor.yml`. Without it the check fails with a 403 in private repositories, because the default token cannot read pull requests there and the shared workflow cannot ask for more permissions than its caller grants.
+
 ### 2. Install the GitHub App on the repository
 
 The automations authenticate as the `airclub-projects-bot` GitHub App, which is installed on selected repositories only.

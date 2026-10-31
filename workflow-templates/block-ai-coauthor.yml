@@ -8,4 +8,9 @@ on:
 
 jobs:
   check-commit-messages:
+    # Needed in private repositories, where the default token cannot read pull
+    # requests; harmless in public ones. The shared workflow cannot grant it itself.
+    permissions:
+      contents: read
+      pull-requests: read
     uses: AIRclub-UdeSA/.github/.github/workflows/block-ai-coauthor.yml@main

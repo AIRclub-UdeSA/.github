@@ -12,4 +12,9 @@ on:
 
 jobs:
   check-commit-messages:
+    # Same block as the template, so this caller does not drift from it. This
+    # repository is public and passes without it.
+    permissions:
+      contents: read
+      pull-requests: read
     uses: ./.github/workflows/block-ai-coauthor.yml
